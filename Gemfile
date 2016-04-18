@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 
 group :production do
@@ -10,8 +8,9 @@ group :production do
 end
 
 # Authentication
-gem 'devise'
-
+gem 'devise', '~> 4.0'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
+gem 'simple_form', '~> 3.2', '>= 3.2.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
