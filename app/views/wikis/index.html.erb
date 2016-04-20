@@ -19,10 +19,10 @@
         <td><%= wiki.title %></td>
         <td><%= wiki.body %></td>
         <td><%= wiki.private %></td>
-        <td><%= wiki.user.email %></td>
-        <td><%= link_to 'Show', wiki %></td>
+        <td><%= wiki.user.email if wiki.user %></td>
+        <td><%= link_to 'Read', wiki %></td>
         <td><%= link_to 'Edit', edit_wiki_path(wiki) %></td>
-        <td><%= link_to 'Destroy', wiki, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', wiki, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
