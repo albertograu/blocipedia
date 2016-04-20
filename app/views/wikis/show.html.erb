@@ -17,7 +17,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @wiki.user.email %>
+  <%= @wiki.user.email if @wiki.user %>
 </p>
 
 <%= link_to 'Edit', edit_wiki_path(@wiki) %> |
