@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Wikis</h1>
+<h1>Wikis</h1>
 
 <table>
   <thead>
@@ -30,4 +30,5 @@
 
 <br>
 
+<% if user_signed_in? %>
 <%= link_to 'New Wiki', new_wiki_path %>
