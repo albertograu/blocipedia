@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def downgrade
     current_user.standard!
     current_user.wikis.update_all(private: false)
-    flash[:notice] = "Membership has been downgraded top Standard"
+    flash[:notice] = "Membership has been downgraded to Standard"
     redirect_to :back
   end
 end
