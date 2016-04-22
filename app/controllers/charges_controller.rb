@@ -14,7 +14,7 @@ class ChargesController < ApplicationController
 
     current_user.premium!
 
-    flash[:notice] = "Enjoy your premium membership! - #{current_user.email}"
+    flash[:notice] = "Thanks! Enjoy your premium membership - #{current_user.email}"
     redirect_to root_path
 
   rescue Stripe::CardError => e
