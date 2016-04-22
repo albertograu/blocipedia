@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # post 'wikis' => 'wikis#create'
 
   devise_for :users
+  resources :users, only: [:show]
 
   root 'wikis#index'
   # The priority is based upon order of creation: first created -> highest priority.
