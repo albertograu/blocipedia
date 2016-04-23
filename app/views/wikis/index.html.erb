@@ -1,5 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<% if current_user && current_user.standard? %>
+  <%= link_to "Upgrade to Premium", new_charge_path %>
+<% end %>
+<% if current_user && current_user.premium? %>
+  <%= link_to "Downgrade Account", new_charge_path %>
+<% end %>
+
 <h1>Wikis</h1>
 
 <table>

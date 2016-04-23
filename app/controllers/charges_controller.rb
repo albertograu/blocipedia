@@ -1,4 +1,12 @@
 class ChargesController < ApplicationController
+  def new
+    @stripe_btn_data = {
+      key: "#{ Rails.configuration.stripe[:publishable_key] }",
+      description: "Blocipedia Premium Membership - #{current_user.email}",
+      amount: Amount.default
+    }
+  end
+
   def create
     customer = Stripe::Customer.create(
       email: current_user.email,
@@ -22,11 +30,14 @@ class ChargesController < ApplicationController
     redirect_to new_charge_path
   end
 
-  def new
-    @stripe_btn_data = {
-      key: "#{ Rails.configuration.stripe[:publishable_key] }",
-      description: "Blocipedia Premium Membership - #{current_user.email}",
-      amount: Amount.default
-    }
+  def destroy
+    current_user.standard!
+
+    current_user.wikis.each do |wikis|
+      wiki.update_attributes(private: false)
+    end
+
+    flash[:notice] = "Membership has been downgraded to Standard"
+    redirect_to wikis_path
   end
 end

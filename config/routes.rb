@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :wikis
-  resources :charges, only: [:new, :create]
-  #
+  resources :charges,  only: [:new, :create]
+  get 'charges' => 'charges#destroy'
   # get 'wikis' => 'wikis#index'
   # post 'wikis' => 'wikis#create'
 
