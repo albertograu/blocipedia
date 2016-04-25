@@ -16,13 +16,13 @@ class ChargesController < ApplicationController
     charge = Stripe::Charge.create(
       customer: customer.id,
       amount: Amount.default,
-      description: "Blocipedia Premium Membership - #{current_user.email}",
+      description: "Premium Membership - #{current_user.email}",
       currency: 'usd'
     )
 
     current_user.premium!
 
-    flash[:notice] = "Thanks! Enjoy your premium membership - #{current_user.email}"
+    flash[:notice] = "Thanks! Enjoy your premium membership #{current_user.email}"
     redirect_to root_path
 
   rescue Stripe::CardError => e
@@ -34,7 +34,7 @@ class ChargesController < ApplicationController
     current_user.standard!
 
     current_user.wikis.each do |wikis|
-      wiki.update_attributes(private: false)
+      wikis.update_attributes(private: false)
     end
 
     flash[:notice] = "Membership has been downgraded to Standard"

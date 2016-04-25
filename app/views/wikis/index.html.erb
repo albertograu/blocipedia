@@ -1,14 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<% if current_user && current_user.standard? %>
-  <%= link_to "Upgrade to Premium", new_charge_path %>
-<% end %>
-<% if current_user && current_user.premium? %>
-  <%= link_to "Downgrade Account", new_charge_path %>
-<% end %>
-
 <h1>Wikis</h1>
-
+<br />
+    <% if user_signed_in? %>
+    <%= link_to 'New Wiki', new_wiki_path, class: 'btn btn-primary' %>
+    <% end %>
 <table>
   <thead>
     <tr>
@@ -27,16 +23,11 @@
         <td><%= wiki.body %></td>
         <td><%= wiki.private %></td>
         <td><%= wiki.user.email if wiki.user %></td>
-        <td><%= link_to 'Read', wiki %></td>
-        <td><%= link_to 'Edit', edit_wiki_path(wiki) %></td>
-        <td><%= link_to 'Delete', wiki, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Read', wiki, class: 'btn btn-default' %></td>
+        <td><%= link_to 'Edit', edit_wiki_path(wiki), class: 'btn btn-default' %></td>
+        <td><%= link_to 'Delete', wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<% if user_signed_in? %>
-<%= link_to 'New Wiki', new_wiki_path %>
-<% end %>
+<br />
