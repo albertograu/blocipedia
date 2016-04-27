@@ -1,5 +1,8 @@
+<div class="container">
+
+
 <% if current_user && current_user.standard? %>
-<h3>Enjoy even more from Blocipedia, upgrade your account to Premium</h3>
+  <p>Enjoy even more from Blocipedia, upgrade your account to Premium</p>
 <%= form_tag charges_path do %>
   <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= @stripe_btn_data[:amount] %> data-description="<%= @stripe_btn_data[:description] %>" ></script>
 <% end %>
@@ -9,3 +12,4 @@
 <h3>Are you sure you wish to Downgrade you account? You will no longer be able to use private wikis.</h3>
   <%= link_to "Downgrade Account", downgrade_path, class: "btn btn-danger" %>
 <% end %>
+</div>

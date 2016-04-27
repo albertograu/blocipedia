@@ -19,12 +19,15 @@
     <%= f.label :body %><br>
     <%= f.text_area :body %>
   </div>
-  <div class="field">
-    <%= f.label :private %><br>
-    <%= f.check_box :private %>
+<% if current_user.admin? || current_user.premium? %>
+  <div class="form-group">
+    <%= f.label :private, class: 'checkbox' do %>
+    <%= f.check_box :private %> Private Wiki
+    <% end %>
   </div>
-  
+<% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+    <% end %>
