@@ -4,18 +4,17 @@ class WikisController < ApplicationController
 
   # GET /wikis
   def index
-     @wiki = Wiki.all
+     @wikis = policy_scope(Wiki)
   end
 
   # GET /wikis/1
   def show
-    set_wiki
-
-    unless !@wiki.private || current_user
-      flash[:alert] = "Only Admins and Premium Members can view/create Private Wikis"
-      redirect_to root_path
-    end
-  end
+    if !@wiki.private?
+      set_wiki
+    else
+       authorize @wiki
+     end
+   end
 
   # GET /wikis/new
   def new
