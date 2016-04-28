@@ -1,18 +1,17 @@
 class WikisController < ApplicationController
   before_action :set_wiki, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :index, :show]
 
   # GET /wikis
   def index
-    # @wiki = Wiki.all
-    @wiki = Wiki.visible_to(current_user)
+     @wiki = Wiki.all
   end
 
   # GET /wikis/1
   def show
-    @wiki = Wiki.find(params[:id])
+    set_wiki
 
-    unless @wiki.private || current_user
+    unless !@wiki.private || current_user
       flash[:alert] = "Only Admins and Premium Members can view/create Private Wikis"
       redirect_to root_path
     end

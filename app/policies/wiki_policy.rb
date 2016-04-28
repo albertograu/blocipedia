@@ -7,11 +7,24 @@ class WikiPolicy < ApplicationPolicy
       @scope = scope
     end
 
+    def index?
+        if @user.admin? || @user.premium?
+          scope.all
+        else
+          scope.where(private: false)
+        end
+      end
+    end
+
+    def show?
+
+    end
+
     def resolve
-      if user.admin?
+      if user.admin? || user.premium?
         scope.all
       else
-        scope.where(published: true)
+        scope.where(private: nil)
       end
     end
   end
@@ -23,6 +36,6 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? or not post.published?
+    user.admin? || user.premium?
   end
 end
