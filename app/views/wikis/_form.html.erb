@@ -27,6 +27,9 @@
   </div>
 <% end %>
 
+<div class="form-group">
+  <%= render partial: 'collaborators/form' , locals: {f: f, collaborators: @wiki.collaborators } %>
+</div>
   <div class="actions">
     <%= f.submit %>
   </div>
