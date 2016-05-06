@@ -4,16 +4,12 @@ class WikisController < ApplicationController
 
   # GET /wikis
   def index
-     @wikis = policy_scope(Wiki)
+    @wikis = policy_scope(Wiki)
   end
 
   # GET /wikis/1
   def show
-    if !@wiki.private?
-      set_wiki
-    else
-       authorize @wiki
-     end
+    authorize @wiki
    end
 
   # GET /wikis/new
@@ -23,6 +19,7 @@ class WikisController < ApplicationController
 
   # GET /wikis/1/edit
   def edit
+    authorize @wiki
   end
 
   # POST /wikis
@@ -42,6 +39,7 @@ class WikisController < ApplicationController
 
   # PATCH/PUT /wikis/1
   def update
+    authorize @wiki
     respond_to do |format|
       if @wiki.update(wiki_params)
         format.html { redirect_to @wiki, notice: 'Wiki was successfully updated.' }
@@ -55,6 +53,7 @@ class WikisController < ApplicationController
 
   # DELETE /wikis/1
   def destroy
+    authorize @wiki
     @wiki.destroy
     respond_to do |format|
       format.html { redirect_to wikis_url, notice: 'Wiki was successfully destroyed.' }

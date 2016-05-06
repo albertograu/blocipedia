@@ -1,33 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Wikis</h1>
-<br />
     <% if user_signed_in? %>
     <%= link_to 'New Wiki', new_wiki_path, class: 'btn btn-primary' %>
     <% end %>
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Private</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<br></br>
 
-  <tbody>
-    <% @wikis.each do |wiki| %>
-      <tr>
-        <td><%= wiki.title %></td>
-        <td><%= wiki.body %></td>
-        <td><%= wiki.private %></td>
-        <td><%= wiki.user.email if wiki.user %></td>
-        <td><%= link_to 'Read', wiki, class: 'btn btn-default' %></td>
-        <td><%= link_to 'Edit', edit_wiki_path(wiki), class: 'btn btn-default' %></td>
-        <td><%= link_to 'Delete', wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br />
+<% @wikis.each do |wiki| %>
+  <div class="col-md-8">
+    <h2><%= wiki.title %></h2>
+    <small>By <%= wiki.user.email %> <%= "Private" if wiki.private? %></small>
+    <p>
+      <%= wiki.body %>
+    </p>
+  </div>
+  <div class="col-md-4">
+    <%= link_to 'Read', wiki, class: 'btn btn-default' %>
+    <%= link_to 'Edit', edit_wiki_path(wiki), class: 'btn btn-default' %>
+    <%= link_to 'Delete', wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+  </div> 
+<% end %>

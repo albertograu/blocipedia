@@ -1,4 +1,21 @@
 class WikiPolicy < ApplicationPolicy
+
+  def show?
+    if user
+      !record.private? || record.user == user || user.admin? || record.users.include?(user)
+    else
+      !record.private?
+    end
+  end
+
+  def update?
+    user && record.user == user || user.admin? || record.users.include?(user)
+  end
+
+  def destroy?
+    update?
+  end
+
   class Scope
       attr_reader :user, :scope
 
